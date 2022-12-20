@@ -55,16 +55,19 @@
         <label for="car_id">ID</label>
         </div><br>
         <div class="form-floating">
-        <input class="form-control" type="text" id="modelo" name="modelo"value=<?php if(isset($veiculo))echo $veiculo['modelo'] ?>>
+        <input class="form-control inputs required" oninput="modeloValidate()" type="text" id="modelo" name="modelo"value=<?php if(isset($veiculo))echo $veiculo['modelo'] ?>>
         <label for="modelo">Modelo</label>
+        <span class="span-required">3 ou mais caracteres</span>
         </div><br>
         <div class="form-floating">
-        <input class="form-control" type="text" id="placa" name="placa" value=<?php if (isset($veiculo)) echo $veiculo['placa'] ?>>
+        <input class="form-control inputs required" oninput="placaValidate()" type="text" id="placa" name="placa" value=<?php if (isset($veiculo)) echo $veiculo['placa'] ?>>
         <label for="placa">Placa</label>
+        <span class="span-required">7 ou mais caracteres</span>
         </div><br>
         <div class="form-floating">
-        <input class="form-control" type="text" id="cor" name="cor" value=<?php if (isset($veiculo))echo $veiculo['cor'] ?>>
+        <input class="form-control inputs required" oninput="corValidate()" type="text" id="cor" name="cor" value=<?php if (isset($veiculo))echo $veiculo['cor'] ?>>
         <label for="cor">Cor</label>
+        <span class="span-required">3 ou mais caracteres</span>
         </div><br>
        
         <button type="submit" class="btn btn-primary" name='car_acao' value='salvar'>Enviar</button>
@@ -74,4 +77,82 @@
 
 
 </body>
+<script>
+ 
+    const form   = document.getElementById('log_form');
+    const campos = document.querySelectorAll('.required');
+    const spans  = document.querySelectorAll(".span-required");
+    const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+ 
+    function modeloValidate(){
+        if(campos[0].value.length < 3)
+        {
+            console.log("to no name");
+            setError(0);
+            return false;
+            setError(0);
+        }
+        else
+        {
+            removeError(0);
+        }
+        removeError(0);
+        return true;
+    }
+
+    function placaValidate(){
+        if(campos[1].value.length < 7)
+        {
+            console.log("to no name");
+            setError(1);
+            return false;
+            setError(1);
+        }
+        else
+        {
+            removeError(1);
+        }
+        removeError(1);
+        return true;
+    }
+
+    function corValidate(){
+        if(campos[2].value.length < 3)
+        {
+            setError(2);
+            return false;
+            setError(2);
+        }
+        else
+        {
+            removeError(2);
+        }
+        removeError(2);
+        return true;
+    }
+
+    function removeError(index){
+        if(!index && index != 0)
+        {
+            for(var i = 0; i < campos.length-1; i++)
+            {
+                campos[i].style.border = '';
+                spans[i].style.display = 'none';
+            }
+        }
+        else
+        {
+            campos[index].style.border = '';
+            spans[index].style.display = 'none';
+        }
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+    function setError(index){
+        campos[index].style.border = '2px solid #e63636';
+        spans[index].style.display = 'block';
+    }
+   
+
+</script>
 </html>

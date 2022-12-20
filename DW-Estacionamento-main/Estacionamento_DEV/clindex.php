@@ -71,7 +71,8 @@
                     $query = 'SELECT * FROM cliente';
                     if($busca != ""){
                         $busca =  $busca.'%';
-                        $query .= ' WHERE nome LIKE :busca' ;
+                        $query .= ' WHERE id LIKE :busca or nome LIKE :busca or sobrenome LIKE :busca
+                        or email LIKE :busca  or senha LIKE :busca or cidade LIKE :busca' ;
                     }
 
                     $stnt = $conexao->prepare($query);
@@ -82,11 +83,11 @@
 
                     $clientes = $stnt->fetchAll();
                     echo'<table class="table "table-secondary" table-striped">';
-                    echo '<tr><th>id</th><th>Nome</th><th>Sobrenome</th><th>Email</th><th>Senha</th><th>Cidade</th><th>Alterar</th><th>Deletar</th></tr>';
+                    echo '<tr><th>id</th><th>Nome</th><th>Sobrenome</th><th>Email</th><th>Cidade</th><th>Alterar</th><th>Deletar</th></tr>';
                     foreach($clientes as $cliente){
                         $editar = '<a href=cad_cliente.php?acao=editar&id='.$cliente['id'].'>Alt</a>';
                         $excluir = '<a href=acao.php?acao=c_excluir&id='.$cliente['id'].'>Excluir</a>';
-                        echo'<tr><td>'.$cliente['id'].'</td><td>'.$cliente['nome'].'</td><td>'.$cliente['sobrenome'].'</td><td>'.$cliente['email'].'</td><td>'.$cliente['senha'].'</td><td>'.$cliente['cidade'].'</td><td>'.$editar.'</td><td>'.$excluir.'</td>';
+                        echo'<tr><td>'.$cliente['id'].'</td><td>'.$cliente['nome'].'</td><td>'.$cliente['sobrenome'].'</td><td>'.$cliente['email'].'</td><td>'.$cliente['cidade'].'</td><td>'.$editar.'</td><td>'.$excluir.'</td>';
                     }
                     echo'</table>';
                     }catch(PDOException $e){

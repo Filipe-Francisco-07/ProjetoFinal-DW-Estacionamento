@@ -20,15 +20,15 @@ include_once 'conexao.php';
     <div class="content">
 
     <h1>Login</h1>
-    <form  action="acao.php" id="log_form" method="post" >
+    <form  action="acao.php" name="log_form" id="log_form" method="post" >
        
         <div>
-        <input class="inputs" type="text" id="login_nome" name="login_nome" placeholder="Nome" >
+        <input class="inputs required" type="text" id="login_nome" name="login_nome" placeholder="Nome" oninput="nameValidate()">
         <span class="span-required">3 ou mais caracteres</span>
         </div>
          <br>
         <div>
-        <input class="inputs" type="password" id="login_senha" name="login_senha" placeholder="Senha" >
+        <input class="inputs required" type="password" id="login_senha" name="login_senha" placeholder="Senha" oninput="senhaValidate()" >
         <span class="span-required">8 ou mais caracteres</span>
         </div>
         <br>   
@@ -43,57 +43,65 @@ include_once 'conexao.php';
 
 
 <script>
-    /*
-    form.addEventListener('submit' , (e) =>{
-        e.preventDefault();
-
-        checar();
-    })
-
-function checar (){
-    var login_nome = document.getElementById('login_nome').value;
-    var login_senha = document.getElementById('login_senha').value;
-
-
-
-if(login_nome == "" || login_nome < 3){
-       alert("Nome inválido!")
-       return false
-    }else{
-        document.getElementById("sem_nome").innerHTML = "";
+ 
+    const form   = document.getElementById('log_form');
+    const campos = document.querySelectorAll('.required');
+    const spans  = document.querySelectorAll(".span-required");
+    const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+ 
+    
+    function nameValidate(){
+        if(campos[0].value.length < 3)
+        {
+            setError(0);
+            return false;
+            setError(0);
+        }
+        else
+        {
+            removeError(0);
+        }
+        removeError(0);
+        return true;
     }
-}
 
-    const form = document.GetElementById['log_form'];
-    const campos = document.QuerySelectorAll('.requiered');
-    const spans = document.QuerySelectorAll(".span-required");
+    function senhaValidate(){
+        if(campos[1].value.length < 8)
+        {
+            setError(1);
+            return false;
+            setError(1);
+        }
+        else
+        {
+            removeError(1);
+        }
+        removeError(1);
+        return true;
+    }
 
-    function erro(index){
-        campos[index].style.border ='2px sodid red';
+    function removeError(index){
+        if(!index && index != 0)
+        {
+            for(var i = 0; i < campos.length-1; i++)
+            {
+                campos[i].style.border = '';
+                spans[i].style.display = 'none';
+            }
+        }
+        else
+        {
+            campos[index].style.border = '';
+            spans[index].style.display = 'none';
+        }
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+    function setError(index){
+        campos[index].style.border = '2px solid #e63636';
         spans[index].style.display = 'block';
-
     }
 
-    function acerto(index){
-        campo[index].style.border ='2px sodid green';
-    }
-
-    function validanome(){
-        if(campos[0].value.lenght < 3){
-            echo("oi");
-            erro(0);
-        }else{
-            acerto(0);
-        }
-    }
-
-    function validasenha(){
-        if(campos[1].value.lenght < 8){
-            erro(1);
-        }else{
-            acerto(1);
-        }
-    }
-*/
+   
 
 </script>
