@@ -86,7 +86,7 @@
     const spans  = document.querySelectorAll(".span-required");
     const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
  
-    
+
     function emailValidate(){
         if(!emailRegex.test(campos[1].value))
         {

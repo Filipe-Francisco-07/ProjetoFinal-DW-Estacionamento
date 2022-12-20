@@ -49,7 +49,7 @@ include_once 'conexao.php';
     const spans  = document.querySelectorAll(".span-required");
     const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
  
-    
+
     function nameValidate(){
         if(campos[0].value.length < 3)
         {
