@@ -2,6 +2,10 @@
     include 'acao.php';
     include_once 'conexao.php';
 
+    if(!isset($_SESSION['usuario'])){
+        header('location: login.php');
+    }
+
     $acao = isset($_GET['acao'])?$_GET['acao']:"";
     $id = isset($_GET['id'])?$_GET['id']:"";
 

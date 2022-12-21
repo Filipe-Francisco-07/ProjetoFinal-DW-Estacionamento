@@ -2,9 +2,10 @@
   include 'acao.php';
   include_once 'conexao.php';
 
-  if(!isset($_SESSION['usuario'])){
-    header('location: login.php');
-  }
+  session_start();
+    if(!isset($_SESSION['usuario'])){
+        header('location: login.php');
+    }
 
   $id = isset($_POST['id'])?$_POST['id']:0;
   $nome = isset($_POST['nome'])?$_POST['nome']:"";

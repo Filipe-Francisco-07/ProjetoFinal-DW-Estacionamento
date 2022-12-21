@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    
     include_once "conexao.php";
    
 
@@ -176,8 +176,6 @@
 
             $stmt->execute();
             header('location: clindex.php');
-
-            
 
         }catch(PDOException $e){
             print("Erro ao conectar com o banco de dados...<br>".$e->getMessage());
